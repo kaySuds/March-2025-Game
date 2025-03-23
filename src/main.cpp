@@ -9,7 +9,7 @@ int main()
     float ballRadius{ 50.f };
     sf::Vector2f ballVelocity{ 10.f, 10.f };
     sf::CircleShape ball{ ballRadius };
-    ball.setFillColor(sf::Color{255, 0, 0});
+    ball.setFillColor(sf::Color{0, 255, 0});
 
     while (window.isOpen())
     {
