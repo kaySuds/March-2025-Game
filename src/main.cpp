@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "grid.hpp"
 
 int main()
 {
@@ -10,6 +11,9 @@ int main()
     sf::Vector2f ballVelocity{ 10.f, 10.f };
     sf::CircleShape ball{ ballRadius };
     ball.setFillColor(sf::Color{0, 255, 1});
+
+    Grid gameGrid{ 32, 5, 5 };
+    gameGrid.print();
 
     while (window.isOpen())
     {

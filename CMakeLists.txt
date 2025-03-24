@@ -31,6 +31,10 @@ FetchContent_MakeAvailable(SFML)
 set(
   SOURCES
   src/main.cpp
+  src/grid.cpp
+  src/grid.hpp
+  src/tile.cpp
+  src/tile.hpp
 )
 
 # Add an executable with the above SOURCES
