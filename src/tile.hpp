@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 // Represents the type the makes up the main (center) part of a tile.
 enum class TileType
@@ -36,6 +37,8 @@ struct Tile
         edges[static_cast<int>(TileEdge::BOTTOM)] = TileEdgeType::OPEN;
         edges[static_cast<int>(TileEdge::LEFT)] = TileEdgeType::OPEN;
     }
+
+    // TileType getTileType(TileType type);
 
     TileEdgeType getEdgeType(TileEdge edge) const;
     void print() const;

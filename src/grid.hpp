@@ -18,7 +18,15 @@ struct Grid
             std::vector<Tile> row;
             for (int column_index = 0; column_index < columns; column_index++)
             {
-                row.emplace_back(Tile{ TileType::FLOOR, true });
+                TileType type = TileType::FLOOR;
+                if (row_index == 0) 
+                {
+                    type = TileType::HOLE;
+                }
+                Tile newTile = Tile{ type, true };
+                newTile.setEdgeTypeForEdge(TileEdge::TOP, TileEdgeType::WALL);
+                newTile.setEdgeTypeForEdge(TileEdge::LEFT, TileEdgeType::DOOR);
+                row.emplace_back(newTile);
             }
             tiles.emplace_back(row);
         }
