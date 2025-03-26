@@ -12,7 +12,7 @@ int main()
     sf::CircleShape ball{ ballRadius };
     ball.setFillColor(sf::Color{0, 255, 1});
 
-    Grid gameGrid{ 32, 5, 5 };
+    Grid gameGrid{ 5, 5 };
     gameGrid.print();
 
     while (window.isOpen())
