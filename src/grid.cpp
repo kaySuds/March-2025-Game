@@ -1,12 +1,12 @@
 #include <iostream>
 #include "grid.hpp"
 
-const Tile& Grid::getTileAtPosition(int column_index, int row_index) 
+const Tile& Grid::get_tile_at_position(int column_index, int row_index) const
 {
     return tiles[row_index][column_index];
 }
 
-const void Grid::print()
+void Grid::print() const
 {
     std::cout << "Printing Grid...\n";
 
@@ -18,4 +18,14 @@ const void Grid::print()
             tiles[row_index][column_index].print();
         }
     }
+}
+
+int Grid::get_column_count() const 
+{
+    return column_count;
+}
+
+int Grid::get_row_count() const 
+{
+    return row_count;
 }

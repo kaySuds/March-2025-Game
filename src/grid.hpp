@@ -6,9 +6,6 @@
 // Represents a grid of tiles to use in our game.
 struct Grid
 {
-    const void print();
-    const Tile& getTileAtPosition(int column_index, int row_index);
-
     // Creates a grid with matching width and height.
     // @param width The max number of tiles in a row. 
     // @param height The max number of tile rows.
@@ -26,6 +23,13 @@ struct Grid
             tiles.emplace_back(row);
         }
     }
+    
+    void print() const;
+
+    const Tile& get_tile_at_position(int column_index, int row_index) const;
+
+    int get_column_count() const;
+    int get_row_count() const;
 
     private:
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "tile.hpp"
 
-const TileEdgeType Tile::getEdgeType(TileEdge edge) 
+TileEdgeType Tile::getEdgeType(TileEdge edge) const
 {
     return edges[static_cast<int>(edge)];
 }
@@ -11,7 +11,7 @@ void Tile::setEdgeTypeForEdge(TileEdge edge, TileEdgeType edgeType)
     edges[static_cast<int>(edge)] = edgeType;
 }
 
-const void Tile::print() 
+void Tile::print() const
 {
     std::cout << "TILE: " << "Type: " << static_cast<int>(type) << "\n";
 }
