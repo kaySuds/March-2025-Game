@@ -13,7 +13,5 @@ void Tile::setEdgeTypeForEdge(TileEdge edge, TileEdgeType edgeType)
 
 const void Tile::print() 
 {
-
-
-    std::cout << "TILE: " << "TODO: Add more details" << "\n";
+    std::cout << "TILE: " << "Type: " << static_cast<int>(type) << "\n";
 }

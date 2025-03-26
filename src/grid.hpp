@@ -12,12 +12,18 @@ struct Grid
     // Creates a grid with matching width and height.
     // @param width The max number of tiles in a row. 
     // @param height The max number of tile rows.
-    Grid(int width, int height): column_count(width), row_count(height) 
+    Grid(int columns, int rows): column_count(columns), row_count(rows) 
     {
-        // Create the full grid of tiles
-        for (int i = 0; i < width * height; i++)
+        // Vector "for loop" to set up the tiles
+        for (int row_index = 0; row_index < rows; row_index++) 
         {
-            tiles.emplace_back(Tile{ TileType::FLOOR, i == 0 });
+            //define row
+            std::vector<Tile> row;
+            for (int column_index = 0; column_index < columns; column_index++)
+            {
+                row.emplace_back(Tile{ TileType::FLOOR, true });
+            }
+            tiles.emplace_back(row);
         }
     }
 
@@ -26,5 +32,6 @@ struct Grid
     int column_count;
     int row_count;
 
-    std::vector<Tile> tiles;
+    // 2D Vector of tiles
+    std::vector<std::vector<Tile>> tiles;
 };
