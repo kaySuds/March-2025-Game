@@ -23,7 +23,7 @@ struct Grid
                 {
                     type = TileType::HOLE;
                 }
-                Tile newTile = Tile{ type, column_index == 2 };
+                Tile newTile = Tile{ type, false };
                 newTile.set_edge_type_for_edge(TileEdge::TOP, TileEdgeType::WALL);
                 newTile.set_edge_type_for_edge(TileEdge::LEFT, TileEdgeType::DOOR);
                 row.emplace_back(newTile);
@@ -34,7 +34,7 @@ struct Grid
     
     void print() const;
 
-    const Tile& get_tile_at_position(int column_index, int row_index) const;
+    Tile& get_tile_at_position(int column_index, int row_index);
 
     int get_column_count() const;
     int get_row_count() const;

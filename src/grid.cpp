@@ -1,7 +1,7 @@
 #include <iostream>
 #include "grid.hpp"
 
-const Tile& Grid::get_tile_at_position(int column_index, int row_index) const
+Tile& Grid::get_tile_at_position(int column_index, int row_index)
 {
     return tiles[row_index][column_index];
 }

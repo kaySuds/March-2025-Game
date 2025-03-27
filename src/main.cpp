@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include "grid.hpp"
 #include "gridColorManager.hpp"
 
@@ -10,8 +11,11 @@ int main()
     int tile_size_pixels = 64;
     Grid gameGrid{ 25, 25 };
     gameGrid.print();
+
+    int player_position_x = 5;
+    int player_position_y = 5;
      
-    GridColorManager colorManager{ GridTheme::LIGHT };
+    GridColorManager colorManager{ GridTheme::DARK };
 
     while (window.isOpen())
     {
@@ -20,6 +24,18 @@ int main()
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) {
+                player_position_x++;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) {
+                player_position_x--;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) {
+                player_position_y--;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) {
+                player_position_y++;
             }
         }
 
@@ -31,6 +47,11 @@ int main()
             for(int column_index = 0; column_index < gameGrid.get_column_count(); column_index++)
             {
                 Tile gridTile = gameGrid.get_tile_at_position(column_index, row_index);
+
+                if (column_index == player_position_x && row_index == player_position_y && !gridTile.get_is_revealed())
+                {
+                    gridTile.reveal();   
+                }
 
                 int y_position_pixels = row_index * tile_size_pixels;
                 int x_position_pixels = column_index * tile_size_pixels;
