@@ -8,7 +8,7 @@ int main()
     window.setFramerateLimit(60);
 
     int tile_size_pixels = 64;
-    Grid gameGrid{ 5, 5 };
+    Grid gameGrid{ 25, 25 };
     gameGrid.print();
      
     GridColorManager colorManager{ GridTheme::LIGHT };
@@ -35,22 +35,27 @@ int main()
                 int y_position_pixels = row_index * tile_size_pixels;
                 int x_position_pixels = column_index * tile_size_pixels;
 
+                // Create the tile rectangle at the grid position
                 sf::RectangleShape tile{ {static_cast<float>(tile_size_pixels), static_cast<float>(tile_size_pixels)} };
                 tile.setPosition({ static_cast<float>(x_position_pixels), static_cast<float>(y_position_pixels)});
 
+                // Create the top edge rectangle
                 sf::RectangleShape top_tile_edge{ {static_cast<float>(tile_size_pixels), 5.f }};
                 top_tile_edge.setPosition({ static_cast<float>(x_position_pixels), static_cast<float>(y_position_pixels)});
 
+                // Create the right edge rectangle
                 sf::RectangleShape right_tile_edge{ {5.f, static_cast<float>(tile_size_pixels) }};
                 right_tile_edge.setPosition({ static_cast<float>(x_position_pixels) + static_cast<float>(tile_size_pixels) - 5.f, static_cast<float>(y_position_pixels)});
 
+                // Create the bottom edge rectangle
                 sf::RectangleShape bottom_tile_edge{ {static_cast<float>(tile_size_pixels), 5.f }};
                 bottom_tile_edge.setPosition({ static_cast<float>(x_position_pixels), static_cast<float>(y_position_pixels) + static_cast<float>(tile_size_pixels) - 5.f} );
 
+                // Create the left edge rectangle
                 sf::RectangleShape left_tile_edge{ {5.f, static_cast<float>(tile_size_pixels) }};
                 left_tile_edge.setPosition({ static_cast<float>(x_position_pixels), static_cast<float>(y_position_pixels)});
 
-                // Apply color theme for tile
+                // Apply color theme for tile and edges
                 if (gridTile.get_is_revealed()) 
                 {
                     tile.setFillColor(colorManager.get_revealed_tile_color_for_type(gridTile.get_tile_type()));
@@ -59,15 +64,17 @@ int main()
                     bottom_tile_edge.setFillColor(colorManager.get_revealed_edge_color_for_type(gridTile.get_edge_type(TileEdge::BOTTOM)));
                     left_tile_edge.setFillColor(colorManager.get_revealed_edge_color_for_type(gridTile.get_edge_type(TileEdge::LEFT)));
                 } else {
-                    sf::Color un_revealed_color = colorManager.get_un_revealed_tile_color();
+                    sf::Color tile_color = colorManager.get_un_revealed_tile_color();
+                    sf::Color edge_color = colorManager.get_un_revealed_tile_edge_color();
 
-                    tile.setFillColor(un_revealed_color);
-                    top_tile_edge.setFillColor(un_revealed_color);
-                    right_tile_edge.setFillColor(un_revealed_color);
-                    bottom_tile_edge.setFillColor(un_revealed_color);
-                    left_tile_edge.setFillColor(un_revealed_color);
+                    tile.setFillColor(tile_color);
+                    top_tile_edge.setFillColor(edge_color);
+                    right_tile_edge.setFillColor(edge_color);
+                    bottom_tile_edge.setFillColor(edge_color);
+                    left_tile_edge.setFillColor(edge_color);
                 }
 
+                // Draw the tile rect and all the edges
                 window.draw(tile);
                 window.draw(top_tile_edge);
                 window.draw(right_tile_edge);

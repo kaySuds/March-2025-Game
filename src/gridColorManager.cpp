@@ -20,5 +20,12 @@ sf::Color GridColorManager:: get_un_revealed_tile_color() const
 {
     int theme_ordinal = static_cast<int>(theme);
 
-    return un_revealed_color_set[theme_ordinal];
+    return un_revealed_tile_color_set[theme_ordinal];
+}
+
+sf::Color GridColorManager::get_un_revealed_tile_edge_color() const
+{
+    int theme_ordinal = static_cast<int>(theme);
+
+    return un_revealed_edge_color_set[theme_ordinal];
 }
