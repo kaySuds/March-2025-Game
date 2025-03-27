@@ -35,6 +35,8 @@ set(
   src/grid.hpp
   src/tile.cpp
   src/tile.hpp
+  src/gridColorManager.cpp
+  src/gridColorManager.hpp
 )
 
 # Add an executable with the above SOURCES

@@ -30,7 +30,7 @@ enum class TileEdgeType
 // Represents a single grid tile in our game.
 struct Tile
 {
-    Tile(TileType t, bool revealed): type(t), isRevealed(revealed)
+    Tile(TileType t, bool revealed): type(t), is_revealed(revealed)
     {
         edges[static_cast<int>(TileEdge::TOP)] = TileEdgeType::OPEN;
         edges[static_cast<int>(TileEdge::RIGHT)] = TileEdgeType::OPEN;
@@ -38,16 +38,20 @@ struct Tile
         edges[static_cast<int>(TileEdge::LEFT)] = TileEdgeType::OPEN;
     }
 
-    // TileType getTileType(TileType type);
+    TileEdgeType get_edge_type(TileEdge edge) const;
+    void set_edge_type_for_edge(TileEdge edge, TileEdgeType edge_type);
 
-    TileEdgeType getEdgeType(TileEdge edge) const;
+    bool get_is_revealed() const;
+    void reveal();
+
+    TileType get_tile_type() const;
+    void set_tile_type(TileType new_type);
+
     void print() const;
-
-    void setEdgeTypeForEdge(TileEdge edge, TileEdgeType edgeType);
 
     private:
 
     TileType type;
-    bool isRevealed;
+    bool is_revealed;
     TileEdgeType edges[4]; 
 };

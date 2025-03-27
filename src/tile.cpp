@@ -2,7 +2,7 @@
 #include "tile.hpp"
 
 // Switch that will get the string name of the tile type from above enum.
-std::string getTileTypeName(TileType type)
+std::string get_tile_type_name(TileType type)
 {  
 	switch (type) 
 	{  
@@ -15,7 +15,7 @@ std::string getTileTypeName(TileType type)
 }
 
 // Takes in an edge & gives us the string name.
-std::string getTileEdgeName(TileEdge edge)
+std::string get_tile_edge_name(TileEdge edge)
 {
     switch (edge)
     {
@@ -28,7 +28,7 @@ std::string getTileEdgeName(TileEdge edge)
 }
 
 // Takes in an edge type & gives us the string name.
-std::string getTileEdgeTypeName(TileEdgeType type)
+std::string get_tile_edge_type_name(TileEdgeType type)
 {
     switch (type)
     {
@@ -38,18 +38,39 @@ std::string getTileEdgeTypeName(TileEdgeType type)
     }
 }
 
-TileEdgeType Tile::getEdgeType(TileEdge edge) const
+TileEdgeType Tile::get_edge_type(TileEdge edge) const
 {
     return edges[static_cast<int>(edge)];
 }
 
-void Tile::setEdgeTypeForEdge(TileEdge edge, TileEdgeType edgeType)
+void Tile::set_edge_type_for_edge(TileEdge edge, TileEdgeType edge_type)
 {
 
-    edges[static_cast<int>(edge)] = edgeType;
+    edges[static_cast<int>(edge)] = edge_type;
 }
 
 void Tile::print() const
 {
-    std::cout << "Tile is a " << getTileTypeName(type) << ", " << getTileEdgeName(TileEdge::TOP) << ": " << getTileEdgeTypeName(getEdgeType(TileEdge::TOP)) << ", " << getTileEdgeName(TileEdge::RIGHT) << ": " << getTileEdgeTypeName(getEdgeType(TileEdge::RIGHT)) << ", " << getTileEdgeName(TileEdge::BOTTOM) << ": " << getTileEdgeTypeName(getEdgeType(TileEdge::BOTTOM)) << ", " << getTileEdgeName(TileEdge::LEFT) << ": " << getTileEdgeTypeName(getEdgeType(TileEdge::LEFT)) << '\n';
+    std::cout << "Tile is a " << get_tile_type_name(type) << ", " << get_tile_edge_name(TileEdge::TOP) << ": " << get_tile_edge_type_name(get_edge_type(TileEdge::TOP)) << ", " << get_tile_edge_name(TileEdge::RIGHT) << ": " << get_tile_edge_type_name(get_edge_type(TileEdge::RIGHT)) << ", " << get_tile_edge_name(TileEdge::BOTTOM) << ": " << get_tile_edge_type_name(get_edge_type(TileEdge::BOTTOM)) << ", " << get_tile_edge_name(TileEdge::LEFT) << ": " << get_tile_edge_type_name(get_edge_type(TileEdge::LEFT)) << '\n';
+}
+
+bool Tile::get_is_revealed() const 
+{
+    return is_revealed;
+}
+
+void Tile::reveal() 
+{
+    is_revealed = true;
+}
+
+
+TileType Tile::get_tile_type() const
+{
+    return type;
+}
+
+void Tile::set_tile_type(TileType new_type)
+{
+    type = new_type;
 }

@@ -23,9 +23,9 @@ struct Grid
                 {
                     type = TileType::HOLE;
                 }
-                Tile newTile = Tile{ type, true };
-                newTile.setEdgeTypeForEdge(TileEdge::TOP, TileEdgeType::WALL);
-                newTile.setEdgeTypeForEdge(TileEdge::LEFT, TileEdgeType::DOOR);
+                Tile newTile = Tile{ type, column_index == 2 };
+                newTile.set_edge_type_for_edge(TileEdge::TOP, TileEdgeType::WALL);
+                newTile.set_edge_type_for_edge(TileEdge::LEFT, TileEdgeType::DOOR);
                 row.emplace_back(newTile);
             }
             tiles.emplace_back(row);
