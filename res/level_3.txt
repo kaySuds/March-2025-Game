@@ -1,0 +1,31 @@
+Ground Floor 4 4
+
+FLR W O O W
+HLE W W O O
+HLE W O O O
+FLR W O O D
+FLR W W O O
+
+FLR O O O W
+FLR O O W O
+FLR W O W O
+FLR O O O O
+FLR O W O O
+
+FLR O W O W
+FLR O O O O
+LDR O O O O
+FLR W O O W
+OBJ O W O O Doll
+
+FLR O W O W
+FLR O O O O
+FLR W W O W
+FLR O O O O
+FLR W W O O
+
+FLR O O W W
+FLR O O W O
+HLE O O W W
+FLR O O W W
+FLR O W W O

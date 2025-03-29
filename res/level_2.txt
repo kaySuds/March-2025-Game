@@ -1,0 +1,31 @@
+Basement 3 2
+
+FLR W O O W
+HLE W O O O
+OBJ W O O O Key-3
+HLE W O O W
+OBJ W W O O ClothScrap
+
+FLR O O O W
+FLR W O W O
+FLR W O O O
+FLR W O O O
+FLR O W O O
+
+FLR O W O W
+FLR W O O W
+FLR O O O O
+FLR O W W W
+FLR O W O O
+
+FLR O W O W
+FLR O O W W
+OBJ O O W O Journal-2
+FLR O O W O
+FLR O W O W
+
+FLR O O W W
+FLR O O W O
+FLR O O W O
+FLR O O W O
+LDR O W W O
