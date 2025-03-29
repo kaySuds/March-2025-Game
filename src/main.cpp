@@ -2,18 +2,21 @@
 #include <SFML/Window.hpp>
 #include "grid.hpp"
 #include "gridColorManager.hpp"
+#include "levelManager.hpp"
 
 int main()
 {
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(60);
 
+    LevelManager LevelManager;
+
     int tile_size_pixels = 64;
-    Grid gameGrid{ 25, 25 };
+    Grid gameGrid{ LevelManager.level_one };
     gameGrid.print();
 
-    int player_position_x = 5;
-    int player_position_y = 5;
+    int player_position_x = 1;
+    int player_position_y = 1;
      
     GridColorManager colorManager{ GridTheme::DARK };
 
@@ -46,9 +49,9 @@ int main()
         {
             for(int column_index = 0; column_index < gameGrid.get_column_count(); column_index++)
             {
-                Tile gridTile = gameGrid.get_tile_at_position(column_index, row_index);
+                Tile& gridTile = gameGrid.get_tile_at_position(column_index, row_index);
 
-                if (column_index == player_position_x && row_index == player_position_y && !gridTile.get_is_revealed())
+                if (column_index == player_position_x && row_index == player_position_y)
                 {
                     gridTile.reveal();   
                 }

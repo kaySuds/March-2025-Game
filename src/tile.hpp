@@ -38,6 +38,14 @@ struct Tile
         edges[static_cast<int>(TileEdge::LEFT)] = TileEdgeType::OPEN;
     }
 
+    Tile(TileType t, TileEdgeType top, TileEdgeType right, TileEdgeType bottom, TileEdgeType left): type(t), is_revealed(false) 
+    {
+        edges[static_cast<int>(TileEdge::TOP)] = top;
+        edges[static_cast<int>(TileEdge::RIGHT)] = right;
+        edges[static_cast<int>(TileEdge::BOTTOM)] = bottom;
+        edges[static_cast<int>(TileEdge::LEFT)] = left;
+    }
+
     TileEdgeType get_edge_type(TileEdge edge) const;
     void set_edge_type_for_edge(TileEdge edge, TileEdgeType edge_type);
 

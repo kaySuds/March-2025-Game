@@ -31,6 +31,8 @@ struct Grid
             tiles.emplace_back(row);
         }
     }
+
+    Grid(std::vector<std::vector<Tile>> t): column_count(t.size()), row_count(t[0].size()), tiles(t) {}
     
     void print() const;
 
