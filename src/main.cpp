@@ -4,17 +4,28 @@
 #include "gridColorManager.hpp"
 #include "levelManager.hpp"
 #include "player.hpp"
+#include <fstream>
+#include <iostream>
 
 int main()
 {
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(60);
 
-    LevelManager LevelManager;
+    std::ifstream file_stream("res/level_1.txt");
+    if (!file_stream)
+    {
+        std::cout << "FAILED TO OPEN FILE!!\n";
+    } else 
+    {
+        std::cout << "OPENED THE FIEL :)\n";
+    }
+
+    LevelManager level_manager;
 
     int tile_size_pixels = 64;
-    Grid gameGrid{ LevelManager.level_one };
-    gameGrid.print();
+    Grid game_grid{ level_manager.level_one };
+    game_grid.print();
      
     GridColorManager colorManager{ GridTheme::DARK };
 
@@ -31,7 +42,7 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) 
             {
 
-                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::RIGHT);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -40,7 +51,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) 
             {
-                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::LEFT);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -49,7 +60,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) 
             {
-                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::TOP);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -58,7 +69,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) 
             {
-                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::BOTTOM);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -70,11 +81,11 @@ int main()
         window.clear();
 
         // Draw the grid
-        for (int row_index = 0; row_index < gameGrid.get_row_count(); row_index++)
+        for (int row_index = 0; row_index < game_grid.get_row_count(); row_index++)
         {
-            for(int column_index = 0; column_index < gameGrid.get_column_count(); column_index++)
+            for(int column_index = 0; column_index < game_grid.get_column_count(); column_index++)
             {
-                Tile& gridTile = gameGrid.get_tile_at_position(column_index, row_index);
+                Tile& gridTile = game_grid.get_tile_at_position(column_index, row_index);
 
                 
                 if ((column_index == rando.pos_x) && (row_index == rando.pos_y))

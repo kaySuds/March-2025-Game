@@ -47,6 +47,22 @@ set(
 # Add an executable with the above SOURCES
 add_executable(main ${SOURCES})
 
+# Create a RESOURCES variable with a link to all the resources to configure
+# ADD NEW RESOURCES HERE!!!!!
+set(
+  RESOURCES
+  res/level_1.txt
+  res/level_2.txt
+  res/level_3.txt
+  res/level_4.txt
+  res/level_5.txt
+)
+
+# Copy file resources
+foreach(RESOURCE_FILE ${RESOURCES})
+  configure_file(${RESOURCE_FILE} ${RESOURCE_FILE} COPYONLY)
+endforeach()
+
 # Set compiler version for main project to C++ 17
 target_compile_features(main PRIVATE cxx_std_17)
 
