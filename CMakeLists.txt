@@ -38,6 +38,10 @@ set(
   src/gridColorManager.cpp
   src/gridColorManager.hpp
   src/levelManager.hpp
+  src/inventoryItem.hpp
+  src/inventoryItem.cpp
+  src/player.hpp
+  src/player.cpp
 )
 
 # Add an executable with the above SOURCES

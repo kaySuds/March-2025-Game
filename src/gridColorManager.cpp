@@ -16,7 +16,7 @@ sf::Color GridColorManager::get_revealed_edge_color_for_type(TileEdgeType edgeTy
     return revealed_tile_edge_color_sets[theme_ordinal][edge_type_ordinal];
 }
 
-sf::Color GridColorManager:: get_un_revealed_tile_color() const
+sf::Color GridColorManager::get_un_revealed_tile_color() const
 {
     int theme_ordinal = static_cast<int>(theme);
 

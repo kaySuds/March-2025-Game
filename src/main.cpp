@@ -3,6 +3,7 @@
 #include "grid.hpp"
 #include "gridColorManager.hpp"
 #include "levelManager.hpp"
+#include "player.hpp"
 
 int main()
 {
@@ -14,11 +15,10 @@ int main()
     int tile_size_pixels = 64;
     Grid gameGrid{ LevelManager.level_one };
     gameGrid.print();
-
-    int player_position_x = 1;
-    int player_position_y = 1;
      
     GridColorManager colorManager{ GridTheme::DARK };
+
+    Player rando{ 1, 1 };
 
     while (window.isOpen())
     {
@@ -28,17 +28,42 @@ int main()
             {
                 window.close();
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) {
-                player_position_x++;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) 
+            {
+
+                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::RIGHT);
+                if (right_edge == TileEdgeType::OPEN)
+                {
+                    rando.pos_x++;
+                }
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) {
-                player_position_x--;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) 
+            {
+                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::LEFT);
+                if (right_edge == TileEdgeType::OPEN)
+                {
+                    rando.pos_x--;
+                }
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) {
-                player_position_y--;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) 
+            {
+                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::TOP);
+                if (right_edge == TileEdgeType::OPEN)
+                {
+                    rando.pos_y--;
+                }
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) {
-                player_position_y++;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) 
+            {
+                Tile current_tile = gameGrid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::BOTTOM);
+                if (right_edge == TileEdgeType::OPEN)
+                {
+                    rando.pos_y++;
+                }
             }
         }
 
@@ -51,7 +76,8 @@ int main()
             {
                 Tile& gridTile = gameGrid.get_tile_at_position(column_index, row_index);
 
-                if (column_index == player_position_x && row_index == player_position_y)
+                
+                if ((column_index == rando.pos_x) && (row_index == rando.pos_y))
                 {
                     gridTile.reveal();   
                 }
@@ -106,6 +132,24 @@ int main()
                 window.draw(left_tile_edge);
             }
         }
+
+        // draw the player
+        // step 1: create circle shape that's smaller than tile size (if 40 pixels, radius = 20)
+        sf::CircleShape player_shape { 20.0f };
+        // step 2: position circle in center of tile player is on
+        //if player is at (1,1) 1 * tile size & 1 * tile size (both directions), take player's pos * tile size
+        int pos_x = rando.pos_x * tile_size_pixels;
+        int pos_y = rando.pos_y * tile_size_pixels;
+
+        int centered_pos_x = pos_x + ((tile_size_pixels / 2) - 20); // offsetting x & y to get player circle centered, 20 is r
+        int centered_pos_y = pos_y + ((tile_size_pixels / 2) - 20);
+
+        player_shape.setPosition({ static_cast<float>(centered_pos_x), static_cast<float>(centered_pos_y) });
+
+        // step 3: color it red for now
+        player_shape.setFillColor(sf::Color::Red);
+
+        window.draw(player_shape);
 
         window.display();
     }

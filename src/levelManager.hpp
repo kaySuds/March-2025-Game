@@ -15,10 +15,10 @@ struct LevelManager
         },
         {
             { TileType::HOLE, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
+            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::WALL },
             { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN },
+            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
+            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::WALL },
         },
         {
             { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
