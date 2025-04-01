@@ -1,5 +1,5 @@
 #pragma once
-#include "inventoryItem.hpp"
+#include "inventory_item.hpp"
 #include <vector>
 
 struct Player 

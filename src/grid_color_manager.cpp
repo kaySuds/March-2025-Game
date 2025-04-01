@@ -1,4 +1,4 @@
-#include "gridColorManager.hpp"
+#include "grid_color_manager.hpp"
 
 sf::Color GridColorManager::get_revealed_tile_color_for_type(TileType tileType) const
 {

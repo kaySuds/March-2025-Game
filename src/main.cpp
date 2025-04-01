@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "grid.hpp"
-#include "gridColorManager.hpp"
-#include "levelManager.hpp"
+#include "grid_color_manager.hpp"
+#include "level_manager.hpp"
 #include "player.hpp"
 #include <fstream>
 #include <iostream>

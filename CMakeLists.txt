@@ -35,11 +35,11 @@ set(
   src/grid.hpp
   src/tile.cpp
   src/tile.hpp
-  src/gridColorManager.cpp
-  src/gridColorManager.hpp
-  src/levelManager.hpp
-  src/inventoryItem.hpp
-  src/inventoryItem.cpp
+  src/grid_color_manager.cpp
+  src/grid_color_manager.hpp
+  src/level_manager.hpp
+  src/inventory_item.hpp
+  src/inventory_item.cpp
   src/player.hpp
   src/player.cpp
 )
@@ -56,6 +56,7 @@ set(
   res/level_3.txt
   res/level_4.txt
   res/level_5.txt
+  res/objects_config.txt
 )
 
 # Copy file resources
