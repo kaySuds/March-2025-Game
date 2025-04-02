@@ -22,3 +22,5 @@ Edge types are:
 O -> OPEN
 W -> WALL
 D -> DOOR
+
+3. Each level is separted by a line containing only a dash - character and this should be used as a delimter between levels.

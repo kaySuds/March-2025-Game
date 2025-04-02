@@ -1,15 +1,10 @@
 #pragma once
-#include <string>
 
-enum class ItemType
-{
-    KEY,
-    NOTE,
-    OBJECT,
-};
+#include <string>
 
 struct InventoryItem
 {
     std::string name;
-    ItemType type;
+    std::string id;
+    std::string description;
 };

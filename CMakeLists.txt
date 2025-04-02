@@ -51,11 +51,7 @@ add_executable(main ${SOURCES})
 # ADD NEW RESOURCES HERE!!!!!
 set(
   RESOURCES
-  res/level_1.txt
-  res/level_2.txt
-  res/level_3.txt
-  res/level_4.txt
-  res/level_5.txt
+  res/level_config.txt
   res/objects_config.txt
 )
 

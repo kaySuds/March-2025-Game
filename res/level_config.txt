@@ -1,0 +1,159 @@
+Sub-Basement 0 0
+
+FLR W W O W
+FLR W O O W
+FLR W O O O
+FLR W W O O
+OBJ W W O O Key-1
+
+FLR O W O W
+FLR O O O W
+FLR O W O O
+FLR O O W O
+FLR O O W O
+
+OBJ O W O W Diary-1
+FLR O O W W
+FLR O W O O
+LDR O O O O
+FLR O W O O
+
+FLR O W O W
+FLR O W O O
+FLR O W O W
+FLR W O O W
+FLR D W O O
+
+FLR O O W W
+FLR O O W O
+FLR W O W O
+FLR O O W O
+FLR O W W O
+-
+Basement 3 2
+
+FLR W O O W
+HLE W O O O
+OBJ W O O O Key-3
+HLE W O O W
+OBJ W W O O Cloth-1
+
+FLR O O O W
+FLR W O W O
+FLR W O O O
+FLR W O O O
+FLR O W O O
+
+FLR O W O W
+FLR W O O W
+FLR O O O O
+FLR O W W W
+FLR O W O O
+
+FLR O W O W
+FLR O O W W
+OBJ O O W O Diary-2
+FLR O O W O
+FLR O W O W
+
+FLR O O W W
+FLR O O W O
+FLR O O W O
+FLR O O W O
+LDR O W W O
+-
+Ground Floor 4 4
+
+FLR W O O W
+HLE W W O O
+HLE W O O O
+FLR W O O D
+FLR W W O O
+
+FLR O O O W
+FLR O O W O
+FLR W O W O
+FLR O O O O
+FLR O W O O
+
+FLR O W O W
+FLR O O O O
+LDR O O O O
+FLR W O O W
+OBJ O W O O Doll-1
+
+FLR O W O W
+FLR O O O O
+FLR W W O W
+FLR O O O O
+FLR W W O O
+
+FLR O O W W
+FLR O O W O
+HLE O O W W
+FLR O O W W
+FLR O W W O
+-
+First Floor 2 2
+
+LDR W O O W
+FLR W O O W
+FLR W O O W
+HLE W O O O
+FLR W W O O
+
+FLR O O W O
+OBJ O O O O Diary-3
+FLR O O O W
+OBJ O O O O Coins-1
+FLR O W O O
+
+FLR O O O W
+HLE O O O O
+FLR O O O W
+HLE O O O O
+FLR O W O O
+
+FLR O O O W
+FLR W O O O
+HLE O O O O
+FLR W O O W
+FLR O W O O
+
+FLR O O W W
+FLR W O W O
+FLR O O W O
+FLR O O W O
+FLR O W W W
+-
+Upper Floor 0 0
+
+FLR W O O W
+OBJ W O O O Locket-1
+FLR W O O O
+FLR W O O O
+FLR W W O O
+
+OBJ O O O W Book-1
+FLR O O O O
+OBJ O O D O Key-2
+HLE O O O O
+FLR O W O O
+
+HLE O O O O
+HLE O W O O
+FLR O O O O
+HLE O O O W
+FLR O W O O
+
+OBJ O O O W
+FLR O W O O
+FLR O O O O
+HLE O O O W
+FLR W W O O
+
+FLR O O W W
+HLE O W O O
+LDR O O W O
+OBJ O O W W Car-1
+FLR O W W O
