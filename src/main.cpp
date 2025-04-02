@@ -9,16 +9,77 @@
 
 int main()
 {
+    // CREATE AND SETUP THE SFML WINDOW
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(60);
 
-    std::ifstream file_stream("res/level_1.txt");
-    if (!file_stream)
+    // CREATE INVENTORY OBJECTS
+    std::vector<InventoryItem> all_items;
+    std::ifstream config_file_reader{ "res/objects_config.txt", std::ifstream::in };
+    if (config_file_reader)
+    {
+        std::cout << "Opened the config file successfully! :)\n";
+        std::string current_line;
+
+        // We will use this to setup properties
+        InventoryItem current_item;
+
+        int current_count = 0;
+        char delim = '\n';
+        // If count is 0 -> This line is the Name line
+        // If count is 1 -> This line is the ID line
+        // If count is 2 -> This line is the start line of the description
+        //                  In this case, we will update the delim for getline from '\n' to '~'
+
+        // While we can get a line from the file (not at the end)
+        // Maybe update the get line funtion delim with something like '~'
+        while (std::getline(config_file_reader, current_line, delim))
+        {
+             // Should have the current line that was read from the file
+             std::cout << current_line << "\n";
+
+            if (current_count == 0)
+            {
+                // NAME
+                current_item.name = current_line;
+                current_count++;
+            }
+            else if (current_count == 1)
+            {
+                // ID
+                current_item.id = current_line;
+                current_count++;
+                delim = '~';
+            }
+            else 
+            {
+                // DESCRIPTION
+                current_item.description = current_line;
+
+                // ADD IT TO THE LIST
+                // NOT SURE ABOUT COPY
+                all_items.emplace_back(current_item);
+
+                // RESET THE DELIM
+                delim = '\n';
+                // RESET THE COUNT
+                current_count = 0;
+
+
+                // TODO: We need to fix the issue where after the first item the name becomes ~ - need to advance to the next line before reading the next name
+            }
+        }
+    }
+    else 
     {
         std::cout << "FAILED TO OPEN FILE!!\n";
-    } else 
-    {
-        std::cout << "OPENED THE FIEL :)\n";
+    }
+
+
+    for (int i = 0; i < all_items.size(); i++) {
+        std::cout << "ITEM AT INDEX: " << i << "\n";
+        std::cout << all_items[i].name;
+        std::cout << "--------------\n";
     }
 
     LevelManager level_manager;
