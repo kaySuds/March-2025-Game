@@ -40,6 +40,8 @@ set(
   src/level_manager.hpp
   src/inventory_item.hpp
   src/inventory_item.cpp
+  src/inventory_manager.hpp
+  src/inventory_manager.cpp
   src/player.hpp
   src/player.cpp
 )
