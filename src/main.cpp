@@ -15,13 +15,7 @@ int main()
 
     // CREATE INVENTORY OBJECTS
     InventoryManager inventoryManager{ "res/objects_config.txt" };
-
-    for (int i = 0; i < inventoryManager.all_items.size(); i++) {
-        std::cout << "ITEM AT INDEX: " << i << "\n";
-        std::cout << inventoryManager.all_items[i].name << "\n";
-        std::cout << inventoryManager.all_items[i].id << "\n";
-        std::cout << inventoryManager.all_items[i].description << "\n";
-    }
+    inventoryManager.print_all_items();
 
     LevelManager level_manager;
 

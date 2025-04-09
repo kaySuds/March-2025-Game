@@ -2,11 +2,22 @@
 #include <fstream>
 #include <iostream>
 
+// PUBLIC FUNCTIONS ---
 InventoryManager::InventoryManager(const std::string& filepath)
 {
     read_from_config(filepath);
 }
 
+void InventoryManager::print_all_items() const
+{
+    std::cout << "PRINTING ALL ITEMS:\n";
+    for (int i = 0; i < all_items.size(); i++) {
+        // Let's get the inventory item at index i
+        all_items[i].print();
+    }
+}
+
+// PRIVATE FUNCTIONS ---
 void InventoryManager::read_from_config(const std::string& filepath)
 {
     std::ifstream config_file_reader{ filepath, std::ifstream::in };
