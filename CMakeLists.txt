@@ -37,6 +37,7 @@ set(
   src/tile.hpp
   src/grid_color_manager.cpp
   src/grid_color_manager.hpp
+  src/level_manager.cpp
   src/level_manager.hpp
   src/inventory_item.hpp
   src/inventory_item.cpp

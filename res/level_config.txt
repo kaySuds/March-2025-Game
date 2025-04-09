@@ -29,7 +29,7 @@ FLR O O W O
 FLR W O W O
 FLR O O W O
 FLR O W W O
--
+~
 Basement 3 2
 
 FLR W O O W
@@ -61,7 +61,7 @@ FLR O O W O
 FLR O O W O
 FLR O O W O
 LDR O W W O
--
+~
 Ground Floor 4 4
 
 FLR W O O W
@@ -93,7 +93,7 @@ FLR O O W O
 HLE O O W W
 FLR O O W W
 FLR O W W O
--
+~
 First Floor 2 2
 
 LDR W O O W
@@ -125,7 +125,7 @@ FLR W O W O
 FLR O O W O
 FLR O O W O
 FLR O W W W
--
+~
 Upper Floor 0 0
 
 FLR W O O W

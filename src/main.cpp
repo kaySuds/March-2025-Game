@@ -17,7 +17,7 @@ int main()
     InventoryManager inventoryManager{ "res/objects_config.txt" };
     inventoryManager.print_all_items();
 
-    LevelManager level_manager;
+    LevelManager level_manager{ "res/level_config.txt" };
 
     int tile_size_pixels = 64;
     Grid game_grid{ level_manager.level_one };

@@ -2,12 +2,13 @@
 #include <fstream>
 #include <iostream>
 
-// PUBLIC FUNCTIONS ---
+// CONSTRUCTORS ---
 InventoryManager::InventoryManager(const std::string& filepath)
 {
     read_from_config(filepath);
 }
 
+// PUBLIC FUNCTIONS ---
 void InventoryManager::print_all_items() const
 {
     std::cout << "PRINTING ALL ITEMS:\n";

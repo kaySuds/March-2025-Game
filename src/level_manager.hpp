@@ -1,14 +1,18 @@
 #pragma once
 
 #include "tile.hpp"
+#include "grid.hpp"
 #include <vector>
 
 struct LevelManager 
 {
+    // CONSTRUCTORS ---
+    LevelManager(const std::string& filepath);
 
-    
+    // PUBLIC FUNCTIONS ---
+    void print_all_levels() const;
 
-
+    // TODO: Remove this after we read in the levels
     std::vector<std::vector<Tile>> level_one {
         { 
             { TileType::HOLE, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
@@ -46,4 +50,13 @@ struct LevelManager
             { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::WALL, TileEdgeType::OPEN },
         }
     };
+
+    private:
+    // PRIVATE FUNCTIONS ---
+    void read_from_config_file(const std::string& filepath);
+
+    // PRIVATE PROPERTIES ---
+    std::vector<Grid> all_levels;
+
+    
 };
