@@ -2,6 +2,7 @@
 
 #include "tile.hpp"
 #include "grid.hpp"
+#include "level.hpp"
 #include <vector>
 
 struct LevelManager 
@@ -56,7 +57,5 @@ struct LevelManager
     void read_from_config_file(const std::string& filepath);
 
     // PRIVATE PROPERTIES ---
-    std::vector<Grid> all_levels;
-
-    
+    std::vector<Level> all_levels;
 };
