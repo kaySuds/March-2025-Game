@@ -71,6 +71,12 @@ void LevelManager::print_all_levels() const
     }
 }
 
+// Just returns a const reference to the level at the current level index.
+const Level& LevelManager::get_current_player_level() const 
+{
+    return all_levels[player_level_index];
+}
+
 // PRIVATE FUNCTIONS ---
 
 // Reads from the given config file and attempts to setup the level details.

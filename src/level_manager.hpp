@@ -8,54 +8,28 @@
 struct LevelManager 
 {
     // CONSTRUCTORS ---
+
+    // Constructs an instance by reading from the given filepath. File must follow format outlined level_config_readme.txt!
     LevelManager(const std::string& filepath);
 
     // PUBLIC FUNCTIONS ---
-    void print_all_levels() const;
 
-    // TODO: Remove this after we read in the levels
-    std::vector<std::vector<Tile>> level_one {
-        { 
-            { TileType::HOLE, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::HOLE, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::WALL, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN },
-        },
-        {
-            { TileType::HOLE, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::WALL },
-        },
-        {
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::LADDER, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN },
-        },
-        {
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL },
-            { TileType::HOLE, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::HOLE, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN, TileEdgeType::OPEN },
-        },
-        {
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::WALL },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::OPEN },
-            { TileType::FLOOR, TileEdgeType::OPEN, TileEdgeType::WALL, TileEdgeType::WALL, TileEdgeType::OPEN },
-        }
-    };
+    // Prints all the levels managed by this instance.
+    void print_all_levels() const;
+    // Gets the current level based on the level index.
+    const Level& get_current_player_level() const;
 
     private:
+
     // PRIVATE FUNCTIONS ---
+
+    // Called when constructing the LevelManager with a filepath.
     void read_from_config_file(const std::string& filepath);
 
     // PRIVATE PROPERTIES ---
+
+    // Used to keep track of all level data.
     std::vector<Level> all_levels;
+    // Used to keep track of the level occupied by the player.
+    int player_level_index = 0;
 };

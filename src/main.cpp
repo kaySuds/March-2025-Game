@@ -21,12 +21,10 @@ int main()
     level_manager.print_all_levels();
 
     int tile_size_pixels = 64;
-    Grid game_grid{ level_manager.level_one };
-    game_grid.print();
      
     GridColorManager colorManager{ GridTheme::DARK };
 
-    Player rando{ 1, 1 };
+    Player rando{ 0, 0 };
 
     while (window.isOpen())
     {
@@ -38,8 +36,8 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) 
             {
-
-                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[rando.pos_y][rando.pos_x];
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::RIGHT);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -48,7 +46,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) 
             {
-                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[rando.pos_y][rando.pos_x];
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::LEFT);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -57,7 +55,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) 
             {
-                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[rando.pos_y][rando.pos_x];
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::TOP);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -66,7 +64,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) 
             {
-                Tile current_tile = game_grid.get_tile_at_position(rando.pos_x, rando.pos_y);
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[rando.pos_y][rando.pos_x];
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::BOTTOM);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -78,17 +76,18 @@ int main()
         window.clear();
 
         // Draw the grid
-        for (int row_index = 0; row_index < game_grid.get_row_count(); row_index++)
+        std::vector<std::vector<Tile>> game_grid = level_manager.get_current_player_level().tile_grid;
+        for (int row_index = 0; row_index < game_grid.size(); row_index++)
         {
-            for(int column_index = 0; column_index < game_grid.get_column_count(); column_index++)
+            for(int column_index = 0; column_index < game_grid[row_index].size(); column_index++)
             {
-                Tile& gridTile = game_grid.get_tile_at_position(column_index, row_index);
+                Tile& gridTile = game_grid[row_index][column_index];
 
                 
-                if ((column_index == rando.pos_x) && (row_index == rando.pos_y))
-                {
-                    gridTile.reveal();   
-                }
+                // if ((column_index == rando.pos_x) && (row_index == rando.pos_y))
+                // {
+                //     gridTile.reveal();   
+                // }
 
                 int y_position_pixels = row_index * tile_size_pixels;
                 int x_position_pixels = column_index * tile_size_pixels;

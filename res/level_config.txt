@@ -10,7 +10,7 @@ FLR O W O W
 FLR O O O W
 FLR O W O O
 FLR O O W O
-FLR O O W O
+FLR O W W O
 
 OBJ O W O W Diary-1
 FLR O O W W
