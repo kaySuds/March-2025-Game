@@ -3,8 +3,8 @@ Level text files contain data for tile grids to use for each level and should be
 1. The first line of the file is the name of the level and the starting x and y position for the player:
 
 e.g
-LEVEL_NAME      START_POS_X      START_POS_Y
-Basement        0                0
+LEVEL_NAME      START_POS_X      START_POS_Y      NUM_COLUMNS_PER_ROW
+Basement        0                0                5
 
 2. Each group of lines afterword represent tiles from left-to-right and top-to-bottom:
 

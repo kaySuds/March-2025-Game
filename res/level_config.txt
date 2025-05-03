@@ -1,4 +1,4 @@
-Sub-Basement 0 0
+Sub-Basement 0 0 5
 
 FLR W W O W
 FLR W O O W
@@ -30,7 +30,7 @@ FLR W O W O
 FLR O O W O
 FLR O W W O
 ~
-Basement 3 2
+Basement 3 2 5
 
 FLR W O O W
 HLE W O O O
@@ -62,7 +62,7 @@ FLR O O W O
 FLR O O W O
 LDR O W W O
 ~
-Ground-Floor 4 4
+Ground-Floor 4 4 5
 
 FLR W O O W
 HLE W W O O
@@ -94,7 +94,7 @@ HLE O O W W
 FLR O O W W
 FLR O W W O
 ~
-First-Floor 2 2
+First-Floor 2 2 5
 
 LDR W O O W
 FLR W O O W
@@ -126,7 +126,7 @@ FLR O O W O
 FLR O O W O
 FLR O W W W
 ~
-Upper-Floor 0 0
+Upper-Floor 0 0 5
 
 FLR W O O W
 OBJ W O O O Locket-1

@@ -83,6 +83,7 @@ void LevelManager::read_from_config_file(const std::string& filepath)
 
         // Initialize stuff for reading
         int current_text_index = 0;
+        int number_of_columns_per_row = 0;
         std::string current_text{};
         Level current_level{};
         std::vector<Tile> current_tile_row{};
@@ -118,6 +119,10 @@ void LevelManager::read_from_config_file(const std::string& filepath)
 
                 case 2:
                 current_level.start_position_y = std::stoi(current_text);
+                break;
+
+                case 3:
+                number_of_columns_per_row = std::stoi(current_text);
                 break;
 
                 default:
@@ -160,7 +165,7 @@ void LevelManager::read_from_config_file(const std::string& filepath)
                 current_tile_row.emplace_back(current_tile);
 
                 // Check if the tile is the last of the row
-                if (current_tile_row.size() == 5)
+                if (current_tile_row.size() == number_of_columns_per_row)
                 {
                     // Add this row to the level grid
                     current_level.tile_grid.emplace_back(current_tile_row);
