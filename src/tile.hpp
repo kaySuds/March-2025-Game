@@ -41,7 +41,7 @@ struct Tile
         edges[static_cast<int>(TileEdge::LEFT)] = TileEdgeType::OPEN;
     }
 
-    Tile(TileType t, bool revealed): type(t), is_revealed(revealed)
+    Tile(const TileType t, const bool revealed): type(t), is_revealed(revealed)
     {
         edges[static_cast<int>(TileEdge::TOP)] = TileEdgeType::OPEN;
         edges[static_cast<int>(TileEdge::RIGHT)] = TileEdgeType::OPEN;
@@ -49,7 +49,7 @@ struct Tile
         edges[static_cast<int>(TileEdge::LEFT)] = TileEdgeType::OPEN;
     }
 
-    Tile(TileType t, TileEdgeType top, TileEdgeType right, TileEdgeType bottom, TileEdgeType left): type(t), is_revealed(false) 
+    Tile(const TileType t, const TileEdgeType top, const TileEdgeType right, const TileEdgeType bottom, const TileEdgeType left): type(t), is_revealed(false)
     {
         edges[static_cast<int>(TileEdge::TOP)] = top;
         edges[static_cast<int>(TileEdge::RIGHT)] = right;
@@ -77,8 +77,8 @@ struct Tile
 
     private:
     // PRIVATE PROPERTIES ---
-    std::string object_id;
-    TileType type;
-    bool is_revealed;
-    TileEdgeType edges[4]; 
+    std::string object_id{};
+    TileType type{};
+    bool is_revealed{};
+    TileEdgeType edges[4]{};
 };

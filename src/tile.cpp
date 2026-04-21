@@ -70,8 +70,9 @@ TileType Tile::get_tile_type() const
     return type;
 }
 
-void Tile::set_tile_type(TileType new_type)
+void Tile::set_tile_type(const TileType new_type)
 {
+    std::cout << "SETTING TILE TYPE: " << get_tile_type_name(new_type) << std::endl;
     type = new_type;
 }
 
@@ -82,5 +83,6 @@ std::string Tile::get_object_id() const
 
 void Tile::set_object_id(const std::string& new_id)
 {
+    std::cout << "SETTING OBJECT ID: " << new_id << std::endl;
     object_id = new_id;
 }

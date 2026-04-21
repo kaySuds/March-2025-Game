@@ -18,6 +18,28 @@ void InventoryManager::print_all_items() const
     }
 }
 
+void InventoryManager::add_item_to_player_inventory(const InventoryItem &item)
+{
+    player_items.push_back(item);
+}
+
+bool InventoryManager::does_item_exist_in_player_inventory(const std::string &item_id) const
+{
+    for (auto & player_item : player_items)
+    {
+        if (player_item.id == item_id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+std::vector<InventoryItem> InventoryManager::get_all_items_in_player_inventory()
+{
+    return player_items;
+}
+
 // PRIVATE FUNCTIONS ---
 void InventoryManager::read_from_config(const std::string& filepath)
 {
@@ -41,7 +63,7 @@ void InventoryManager::read_from_config(const std::string& filepath)
         // Maybe update the get line funtion delim with something like '~'
         while (std::getline(config_file_reader, current_line, delim))
         {
-            if (current_line.length() == 0)
+            if (current_line.empty())
             {
                 // Ignore blank reads -- probably end of object
                 continue;
@@ -74,7 +96,7 @@ void InventoryManager::read_from_config(const std::string& filepath)
 
                 // ADD IT TO THE LIST
                 // NOT SURE ABOUT COPY
-                all_items.emplace_back(current_item);
+                all_items.push_back(current_item);
 
                 // std::cout << "ADDED THE ITEM\n";
 

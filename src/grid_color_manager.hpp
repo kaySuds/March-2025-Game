@@ -46,18 +46,18 @@ struct GridColorManager
         { black,             black }
     };
     
-    static inline constexpr sf::Color white{ 255, 255, 255 };
-    static inline constexpr sf::Color black{ 0, 0, 0 };
-    static inline constexpr sf::Color off_black{ 15, 15, 15 };
-    static inline constexpr sf::Color dark_gray{ 75, 75, 75 };
-    static inline constexpr sf::Color mid_gray{ 120, 120, 120 };
-    static inline constexpr sf::Color gray{ 200, 180, 190 };
-    static inline constexpr sf::Color light_gray{ 242, 239, 231 };
-    static inline constexpr sf::Color light_teal{ 154, 203, 208 };
-    static inline constexpr sf::Color teal{ 72, 166, 167 };
-    static inline constexpr sf::Color dark_teal{ 0, 106, 113 };
-    static inline constexpr sf::Color beige{ 245, 238, 220 };
-    static inline constexpr sf::Color goldenrod{ 221, 168, 83 };
-    static inline constexpr sf::Color red_violet_brown{ 96, 70, 82 };
-    static inline constexpr sf::Color dark_brown{ 40, 20, 32 };
+    static constexpr sf::Color white{ 255, 255, 255 };
+    static constexpr sf::Color black{ 0, 0, 0 };
+    static constexpr sf::Color off_black{ 15, 15, 15 };
+    static constexpr sf::Color dark_gray{ 75, 75, 75 };
+    static constexpr sf::Color mid_gray{ 120, 120, 120 };
+    static constexpr sf::Color gray{ 200, 180, 190 };
+    static constexpr sf::Color light_gray{ 242, 239, 231 };
+    static constexpr sf::Color light_teal{ 154, 203, 208 };
+    static constexpr sf::Color teal{ 72, 166, 167 };
+    static constexpr sf::Color dark_teal{ 0, 106, 113 };
+    static constexpr sf::Color beige{ 245, 238, 220 };
+    static constexpr sf::Color goldenrod{ 221, 168, 83 };
+    static constexpr sf::Color red_violet_brown{ 96, 70, 82 };
+    static constexpr sf::Color dark_brown{ 40, 20, 32 };
 };

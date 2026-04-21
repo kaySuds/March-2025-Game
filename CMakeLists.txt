@@ -56,6 +56,7 @@ set(
   RESOURCES
   res/level_config.txt
   res/objects_config.txt
+  res/ShareTech-Regular.ttf
 )
 
 # Copy file resources
