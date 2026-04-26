@@ -11,7 +11,7 @@ enum class GridTheme
 
 struct GridColorManager
 {
-    GridColorManager(GridTheme t): theme(t) {}
+    explicit GridColorManager(const GridTheme t): theme(t) {}
 
     sf::Color get_revealed_tile_color_for_type(TileType tileType) const;
     sf::Color get_revealed_edge_color_for_type(TileEdgeType edgeType) const;

@@ -6,7 +6,7 @@
 struct InventoryManager
 {
     // CONSTRUCTORS ---
-    InventoryManager(const std::string& filepath);
+    explicit InventoryManager(const std::string& filepath);
 
     // PUBLIC PROPERTIES ---
     std::vector<InventoryItem> all_items; // TODO: Maybe make this a map? Could then index by id

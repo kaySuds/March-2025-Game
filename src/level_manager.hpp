@@ -19,6 +19,8 @@ struct LevelManager
     // Gets the current level based on the level index.
     const Level& get_current_player_level() const;
 
+    int get_player_level_index() const;
+
     private:
 
     // PRIVATE FUNCTIONS ---

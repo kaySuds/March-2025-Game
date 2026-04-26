@@ -45,6 +45,8 @@ set(
   src/inventory_manager.cpp
   src/player.hpp
   src/player.cpp
+        src/scene_manager.hpp
+        src/scene_manager.cpp
 )
 
 # Add an executable with the above SOURCES

@@ -86,3 +86,15 @@ void Tile::set_object_id(const std::string& new_id)
     std::cout << "SETTING OBJECT ID: " << new_id << std::endl;
     object_id = new_id;
 }
+
+bool Tile::has_a_door() const
+{
+    for (const auto &edge: edges)
+    {
+        if (edge == TileEdgeType::DOOR)
+        {
+            return true;
+        }
+    }
+    return false;
+}

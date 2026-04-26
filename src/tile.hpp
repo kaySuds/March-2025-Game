@@ -73,6 +73,8 @@ struct Tile
     std::string get_object_id() const;
     void set_object_id(const std::string& new_id);
 
+    bool has_a_door() const;
+
     void print() const;
 
     private:
