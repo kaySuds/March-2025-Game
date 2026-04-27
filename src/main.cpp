@@ -89,19 +89,20 @@ int main()
 
     SceneManager scene_manager{};
 
-    std::vector<std::vector<Tile>> current_level_tiles = level_manager.get_current_player_level().tile_grid;
+    // std::vector<std::vector<Tile>> current_level_tiles = level_manager.get_current_player_level().tile_grid;
 
     Player player{ 0, 0 };
 
     int inventory_button_debounce_frames = 0;
     int missing_key_debounce_frames = 0;
     bool can_interact = false;
-    bool can_open = false;
+
+    float inventory_scroll_offset = 8.f;
 
     // WINDOW SETUP ----------
 
     // Create and set up the SFML Window
-    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({350u, 350u}), "CMake SFML Project");
     window.setFramerateLimit(60);
 
     std::string font_path = "res/ShareTech-Regular.ttf";
@@ -136,7 +137,7 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right)) 
             {
                 
-                Tile current_tile = current_level_tiles[player.pos_y][player.pos_x];
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x];
                 TileEdgeType right_edge = current_tile.get_edge_type(TileEdge::RIGHT);
                 if (right_edge == TileEdgeType::OPEN)
                 {
@@ -145,7 +146,7 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left)) 
             {
-                Tile current_tile = current_level_tiles[player.pos_y][player.pos_x];
+                Tile current_tile = level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x];
                 TileEdgeType left_edge = current_tile.get_edge_type(TileEdge::LEFT);
                 if (left_edge == TileEdgeType::OPEN)
                 {
@@ -154,27 +155,48 @@ int main()
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) 
             {
-                Tile current_tile = current_level_tiles[player.pos_y][player.pos_x];
-                TileEdgeType top_edge = current_tile.get_edge_type(TileEdge::TOP);
-                if (top_edge == TileEdgeType::OPEN)
+                if (scene_manager.get_scene() == GameSceneType::GAMEPLAY)
                 {
-                    player.pos_y--;
+                    Tile current_tile = level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x];
+                    TileEdgeType top_edge = current_tile.get_edge_type(TileEdge::TOP);
+                    if (top_edge == TileEdgeType::OPEN)
+                    {
+                        player.pos_y--;
+                    }
+                }
+                else
+                {
+                    inventory_scroll_offset += 12.f;
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) 
             {
-                Tile current_tile = current_level_tiles[player.pos_y][player.pos_x];
-                TileEdgeType down_edge = current_tile.get_edge_type(TileEdge::BOTTOM);
-                if (down_edge == TileEdgeType::OPEN)
+                if (scene_manager.get_scene() == GameSceneType::GAMEPLAY)
                 {
-                    player.pos_y++;
+                    Tile current_tile = level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x];
+                    TileEdgeType down_edge = current_tile.get_edge_type(TileEdge::BOTTOM);
+                    if (down_edge == TileEdgeType::OPEN)
+                    {
+                        player.pos_y++;
+                    }
+                }
+                else
+                {
+                    inventory_scroll_offset -= 12.f;
                 }
             }
+
+            // HANDLE HOLES
+            if (level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].get_tile_type() == TileType::HOLE)
+            {
+                level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].reveal();
+                level_manager.set_player_level_index(level_manager.get_player_level_index() - 1);
+            }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::E))
             {
-                std::cout << "E pressed" << std::endl;
                 // We need to know where we are here
-                Tile& player_tile = current_level_tiles[player.pos_y][player.pos_x];
+                Tile& player_tile = level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x];
                 std::string object_id = player_tile.get_object_id();
                 if (!object_id.empty())
                 {
@@ -190,6 +212,15 @@ int main()
                         }
                     }
                 }
+                if (player_tile.get_tile_type() == TileType::LADDER)
+                {
+                    // Transition to next level!
+                    // 1. Increment the level index
+                    level_manager.set_player_level_index(level_manager.get_player_level_index() + 1);
+                    // 2. Set the position to the start position
+                    player.pos_x = level_manager.get_current_player_level().start_position_x;
+                    player.pos_y = level_manager.get_current_player_level().start_position_y;
+                }
                 if (can_interact)
                 {
                     // TODO: REPLACE WITH REAL LOGIC
@@ -198,6 +229,12 @@ int main()
                     {
                         case 0:
                             can_open_door = inventoryManager.does_item_exist_in_player_inventory("Key-1");
+                            break;
+                        case 2:
+                            can_open_door = inventoryManager.does_item_exist_in_player_inventory("Key-2");
+                            break;
+                        case 4:
+                            can_open_door = inventoryManager.does_item_exist_in_player_inventory("Key-3");
                             break;
                         default:
                             can_open_door = false;
@@ -209,8 +246,17 @@ int main()
                     }
                     else
                     {
-                        // TODO: find the edge with the door
-                        current_level_tiles[player.pos_y][player.pos_x].set_edge_type_for_edge(TileEdge::TOP, TileEdgeType::OPEN);
+                        TileEdge door_edge;
+                        if (level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].get_edge_type(TileEdge::RIGHT) == TileEdgeType::DOOR)
+                            door_edge = TileEdge::RIGHT;
+                        else if (level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].get_edge_type(TileEdge::BOTTOM) == TileEdgeType::DOOR)
+                            door_edge = TileEdge::BOTTOM;
+                        else if (level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].get_edge_type(TileEdge::LEFT) == TileEdgeType::DOOR)
+                            door_edge = TileEdge::LEFT;
+                        else
+                            door_edge = TileEdge::TOP;
+
+                        level_manager.get_current_player_level().tile_grid[player.pos_y][player.pos_x].set_edge_type_for_edge(door_edge, TileEdgeType::OPEN);
                     }
 
                 }
@@ -219,13 +265,14 @@ int main()
             {
                 if (inventory_button_debounce_frames <= 0)
                 {
-                    inventory_button_debounce_frames = 60;
+                    inventory_button_debounce_frames = 10;
                     if (scene_manager.get_scene() == GameSceneType::GAMEPLAY)
                     {
                         scene_manager.update_scene(GameSceneType::INVENTORY_MENU);
                     }
                     else
                     {
+                        inventory_scroll_offset = 8.f;
                         scene_manager.update_scene(GameSceneType::GAMEPLAY);
                     }
                 }
@@ -244,18 +291,16 @@ int main()
         // DRAW TO THE SCREEN
         window.clear();
 
-
         switch (scene_manager.get_scene())
         {
             case GameSceneType::GAMEPLAY:
             {
                 // Draw the grid
-                for (int row_index = 0; row_index < current_level_tiles.size(); row_index++)
+                for (int row_index = 0; row_index < level_manager.get_current_player_level().tile_grid.size(); row_index++)
                 {
-                    for (int column_index = 0; column_index < current_level_tiles[row_index].size(); column_index++)
+                    for (int column_index = 0; column_index < level_manager.get_current_player_level().tile_grid[row_index].size(); column_index++)
                     {
-                        Tile& gridTile = current_level_tiles[row_index][column_index];
-
+                        Tile& gridTile = level_manager.get_current_player_level().tile_grid[row_index][column_index];
 
                         if ((column_index == player.pos_x) && (row_index == player.pos_y))
                         {
@@ -265,7 +310,8 @@ int main()
                             {
                                 // Draw pickup label
                                 sf::Text pickup_text(font, "Press E to pick up", 12);
-                                pickup_text.setPosition({0.0, 0.0});
+                                pickup_text.setPosition({static_cast<float>(level_manager.get_current_player_level().tile_grid.size() * tile_size_pixels)  - pickup_text.getLocalBounds().size.x, static_cast<float>(level_manager.get_current_player_level().tile_grid[0].size() * tile_size_pixels)});
+                                pickup_text.setFillColor({255, 255, 255, 100});
                                 window.draw(pickup_text);
                             }
                             if (gridTile.has_a_door())
@@ -273,13 +319,24 @@ int main()
                                 // Draw open door label
                                 can_interact = true;
 
-                                std::string pickup_description = "Press E to interact";
+                                std::string pickup_description = "Press E to open";
                                 if (missing_key_debounce_frames > 0)
                                 {
                                     pickup_description = "Hmm... It's locked";
                                 }
                                 sf::Text pickup_text(font, pickup_description, 12);
-                                pickup_text.setPosition({0.0, 0.0});
+                                pickup_text.setPosition({static_cast<float>(level_manager.get_current_player_level().tile_grid.size() * tile_size_pixels) - pickup_text.getLocalBounds().size.x, static_cast<float>(level_manager.get_current_player_level().tile_grid[0].size() * tile_size_pixels)});
+                                pickup_text.setFillColor({255, 255, 255, 100});
+                                window.draw(pickup_text);
+                            }
+                            if (gridTile.get_tile_type() == TileType::LADDER)
+                            {
+                                // Draw open door label
+                                can_interact = true;
+
+                                sf::Text pickup_text(font, "Press E to climb", 12);
+                                pickup_text.setPosition({static_cast<float>(level_manager.get_current_player_level().tile_grid.size() * tile_size_pixels) - pickup_text.getLocalBounds().size.x, static_cast<float>(level_manager.get_current_player_level().tile_grid[0].size() * tile_size_pixels)});
+                                pickup_text.setFillColor({255, 255, 255, 100});
                                 window.draw(pickup_text);
                             }
                         }
@@ -334,6 +391,12 @@ int main()
                         window.draw(left_tile_edge);
                     }
                 }
+                // Level text
+                sf::Text level_text(font, level_manager.get_current_level_name(), 12);
+                level_text.setFillColor({255, 255, 255, 255});
+                level_text.setPosition({0, static_cast<float>(level_manager.get_current_player_level().tile_grid[0].size() * tile_size_pixels)});
+
+                window.draw(level_text);
 
                 // Draw the player
                 // step 1: create circle shape that's smaller than tile size (if 40 pixels, radius = 20)
@@ -364,16 +427,17 @@ int main()
                 // ----------------------
 
                 // Text/layout constants
-                float vertical_text_spacing = 8.0f;
-                float horizontal_text_padding = 8.0f;
-                float title_divider_width = 2.f;
-                float row_divider_width = 1.f;
+                constexpr float vertical_text_spacing = 8.0f;
+                constexpr float horizontal_text_padding = 8.0f;
+                constexpr float title_divider_width = 2.f;
+                constexpr float row_divider_width = 1.f;
 
-                unsigned int header_character_size = 28;
-                unsigned int item_name_character_size = 20;
-                unsigned int item_description_character_size = 16;
+                constexpr unsigned int header_character_size = 28;
+                constexpr unsigned int item_name_character_size = 20;
+                constexpr unsigned int item_description_character_size = 16;
 
-                float current_y_positioning = 8.0f;
+                // Layout variables
+                float current_y_positioning = inventory_scroll_offset;
 
                 // HEADER
 
@@ -401,7 +465,6 @@ int main()
                     name_text.setPosition({horizontal_text_padding, current_y_positioning});
                     name_text.setFillColor(sf::Color::White);
 
-                    // TODO: Handle long descriptions (wrapping) - ONLY BASED ON EACH ACTUAL LINE - SPLT BY NEW LINE FIRST
                     std::vector<std::string> description_lines = split(item.description, '\n');
 
                     float total_description_height = 0.f;
@@ -427,7 +490,6 @@ int main()
                     divider.setPosition({0, current_y_positioning + name_text.getLocalBounds().size.y + vertical_text_spacing + total_description_height + vertical_text_spacing});
 
                     window.draw(name_text);
-
                     window.draw(divider);
 
                     current_y_positioning = current_y_positioning + name_text.getLocalBounds().size.y + vertical_text_spacing + total_description_height + vertical_text_spacing + row_divider_width + vertical_text_spacing;
@@ -435,7 +497,6 @@ int main()
                 break;
             }
         }
-
 
         // Display the drawing
         window.display();

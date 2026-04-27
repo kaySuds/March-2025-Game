@@ -72,19 +72,29 @@ void LevelManager::print_all_levels() const
 }
 
 // Just returns a const reference to the level at the current level index.
-const Level& LevelManager::get_current_player_level() const 
+Level& LevelManager::get_current_player_level()
 {
     return all_levels[player_level_index];
 }
 
-int LevelManager::get_player_level_index() const
+void LevelManager::set_player_level_index(unsigned int i)
+{
+    player_level_index = i;
+}
+
+unsigned int LevelManager::get_player_level_index() const
 {
     return player_level_index;
 }
 
+const std::string& LevelManager::get_current_level_name() const
+{
+    return all_levels[player_level_index].name;
+}
+
 // PRIVATE FUNCTIONS ---
 
-// Reads from the given config file and attempts to setup the level details.
+// Reads from the given config file and attempts to set up the level details.
 void LevelManager::read_from_config_file(const std::string& filepath)
 {
     std::ifstream config_file_reader{ filepath, std::ifstream::in };

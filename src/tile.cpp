@@ -64,7 +64,6 @@ void Tile::reveal()
     is_revealed = true;
 }
 
-
 TileType Tile::get_tile_type() const
 {
     return type;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "tile.hpp"
-#include "grid.hpp"
 #include "level.hpp"
 #include <vector>
 
@@ -10,16 +8,19 @@ struct LevelManager
     // CONSTRUCTORS ---
 
     // Constructs an instance by reading from the given filepath. File must follow format outlined level_config_readme.txt!
-    LevelManager(const std::string& filepath);
+    explicit LevelManager(const std::string& filepath);
 
     // PUBLIC FUNCTIONS ---
 
     // Prints all the levels managed by this instance.
     void print_all_levels() const;
     // Gets the current level based on the level index.
-    const Level& get_current_player_level() const;
+    [[nodiscard]] Level& get_current_player_level();
 
-    int get_player_level_index() const;
+    void set_player_level_index(unsigned int i);
+    [[nodiscard]] unsigned int get_player_level_index() const;
+
+    [[nodiscard]] const std::string& get_current_level_name() const;
 
     private:
 
@@ -33,5 +34,5 @@ struct LevelManager
     // Used to keep track of all level data.
     std::vector<Level> all_levels;
     // Used to keep track of the level occupied by the player.
-    int player_level_index = 0;
+    unsigned int player_level_index = 0;
 };
